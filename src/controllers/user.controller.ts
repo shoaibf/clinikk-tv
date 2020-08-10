@@ -34,12 +34,12 @@ export default {
       const query:any = {}
       
       if (req.query.search) {
-        query['fullName'] = new RegExp(req.query.search, 'gi')
+        query['fullName'] = new RegExp(req.query.search as string, 'gi')
       }
 
       const sort:any = { 'createdAt': -1 }
-      const page = req.query.page ? parseInt(req.query.page) : 1
-      const limit = req.query.limit ? parseInt(req.query.limit) : 10
+      const page = req.query.page ? parseInt(req.query.page as string) : 1
+      const limit = req.query.limit ? parseInt(req.query.limit as string) : 10
       const options = { page, limit, sort }
       const result = await User.paginate(query, options)
 
