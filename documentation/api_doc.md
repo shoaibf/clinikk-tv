@@ -244,7 +244,7 @@ OR
 }
 ```
 #### Sign in
-
+Endpoint: POST api/signin
 Sample Request:
 ```
 {
@@ -268,6 +268,34 @@ OR
             "preference": "mobile"
         },
       "message": "Login Successful"
+}
+```
+#### Reset Password
+Endpoint: POST api/passwordReset
+Sample Request:
+```
+{
+    "email":"Laawt@lawtorney.in"
+}
+OR
+{
+    "mobile":"8197080968"
+}
+```
+Sample Response - Failure
+```
+{
+    "message": "Account does not exist"
+}
+```
+Sample Response -Success
+```
+{
+    "message": "Password reset link has been sent to your email. Please check your inbox"
+}
+OR
+{
+    "message": "OTP has been sent to your mobile. Enter OTP to reset password"
 }
 ```
 
