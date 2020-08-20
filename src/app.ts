@@ -6,7 +6,7 @@ import routes from './routes'
 import errorHandler from './utilities/errors/handler'
 
 const app = express()
-const databaseuri = 'mongodb://localhost:27017/ts-node-express'
+const databaseuri = 'mongodb://admin:admin%40123@ds147225.mlab.com:47225/lawtorney-beta-dev'
 const port = 3000
 
 app.use(bodyParser.json())

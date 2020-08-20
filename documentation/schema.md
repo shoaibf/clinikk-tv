@@ -24,7 +24,8 @@ A table to store all user credentials, tokens, profile info and orders placed by
       profile: Object
         {
             name: string,
-            gravator: string
+            gravator: string,
+            preference: string
         },
       createdAt: Timestamp,
       updatedAt: Timestamp
@@ -129,7 +130,9 @@ To store all details of all services offered by Lawtorney.
       serviceType: Object,
       description: string,
       contentLink: string,
-      icon: string
+      icon: string,
+      formData: Object,
+      meta: Object
   }
   ```
   ##### Example
@@ -146,7 +149,9 @@ To store all details of all services offered by Lawtorney.
                     Quickly and Efficiently at Affordable Rate.
                     We give 100% online service.",
       "contentLink": "https://docs.google.com/spreadsheets/d/JYasdasdasda/",
-      "icon": "www.lawtorney/services/gst_reg.jpeg"
+      "icon": "www.lawtorney/services/gst_reg.jpeg",
+      "formData": Object,
+      "meta": "Meta data for a service"
   }
   ```
 

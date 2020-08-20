@@ -14,8 +14,9 @@ Platform: Node.JS Language: Typescript Package Manager: npm Database: JSON file 
 
 ## API Specs
 
-#### List all services
+#### List all services 
 Endpoint: GET api/services
+Endpoint: GET api/services?category
 Sample Response:
 ```
 [
@@ -70,7 +71,6 @@ Sample Response:
 Endpoint: GET api/services/:serviceName
 Sample Response:
 ```
-[
 {
     "serviceId": {
       "$oid": "5ec7b415fc767c906877a633"
@@ -83,9 +83,55 @@ Sample Response:
                   Quickly and Efficiently at Affordable Rate.
                   We give 100% online service.",
     "contentLink": "https://docs.google.com/spreadsheets/d/JYasdasdasda/",
+    "formData" : Object
+    "meta": "meta data for the service"
     "icon": "www.lawtorney/services/gst_reg.jpeg"
 }
-]
+```
+#### DELETE service
+Endpoint: DELETE api/services/:serviceId
+Sample Response:
+```
+{
+    "message": "Service successfully deleted"
+}
+    
+```
+#### UPDATE service
+Endpoint: PUT api/services/:serviceId
+Sample Request:
+```
+{
+    "serviceName": "logoRegistration",
+    "serviceDisplayName": "Logo Registration",
+    "category": "Taxation",
+    "serviceType": "CA",
+    "description": "Our Service offers GST Registration in India.
+                  Quickly and Efficiently at Affordable Rate.
+                  We give 100% online service.",
+    "contentLink": "https://docs.google.com/spreadsheets/d/JYasdasdasda/",
+    "icon": "www.lawtorney/services/gst_reg2.jpeg"
+}
+```
+Sample Response:
+```
+{
+    "message": "Service successfully updated"
+}
+    
+```
+### Registration form for a service
+Endpoint: GET api/services/:serviceName/form
+Sample Response:
+```
+
+{
+    "name": "businessName",
+    "label":"Business name"
+    "type" :"text",
+    "options": Object,
+    "validation": Object
+}
 ```
 #### List orders of a customer
 All orders - Endpoint: GET api/orders
@@ -142,21 +188,87 @@ Result
     Message:"Order placed successfully"
 }
 ```
-#### Update an order by admin
-Endpoint: POST api/orders/:orderId
-Following fields of an order can be updated
-- orderStatus
-- transactionId
-- deliveryDate
-- paymentStatus
-- comments
+#### Update an order
+Endpoint: PUT api/orders/:orderId
 ```
 {
     "orderStatus":3,
     "transactionId":"sadaasd3dqsd",
     "deliveryDate": "2020-08-01T05:20:04.990Z",
     "paymentStatus":2,
+    "formData": [],
+    "documents":[],
     "comments":"Sent to lawyer for audit"
 }
 ```
+#### Search services by name, category,type 
+Endpoint: GET api/search
+Sample Response: 
+```
+[
+{
+    "serviceId": {
+      "$oid": "5ec7b415fc767c906877a633"
+    },
+    "serviceName": "gstRegistration",
+    "serviceDisplayName": "GST Registration",
+    "category": "Tax",
+    "serviceType": "Lawyer",
+    "description": "Our Service offers GST Registration in India.
+                  Quickly and Efficiently at Affordable Rate.
+                  We give 100% online service.",
+    "contentLink": "https://docs.google.com/spreadsheets/d/JYasdasdasda/",
+    "icon": "www.lawtorney/services/gst_reg.jpeg"
+}
+]
+```
+#### Signup
+Endpoint: POST api/signup
+Sample Request:
+```
+{
+    "email": "lawt@lawtorney.in",
+    "mobile": "8197080968",
+    "password": "secret123",
+    "preference": "mobile"
+}
+```
+Sample Response:
+```
+{
+    "message": "OTP has been sent to Mobile Number"
+}
+OR
+{
+    "message": "Verification link has been sent to your email. Please verify your account"
+}
+```
+#### Sign in
+
+Sample Request:
+```
+{
+    "email": "lawt@lawtorney.in"
+    "password": "secret123"
+}
+```
+Sample Response:
+```
+{
+    "message": "Invalid credentials"
+}
+OR
+{
+      "userId": "asasaljknl435nm",
+      "email": "lawt@lawtorney.in",
+      profile: 
+        {
+            "name": "Lawful",
+            "gravator": "https://lawtorney.in/users/profile/gravator.png",
+            "preference": "mobile"
+        },
+      "message": "Login Successful"
+}
+```
+
 
