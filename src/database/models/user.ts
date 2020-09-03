@@ -1,11 +1,74 @@
 import mongoose, { Document } from 'mongoose'
-import user from './../schema/user'
+import userSchema from './../schema/user'
+import * as bcrypt from 'bcrypt'
+import { sign } from "jsonwebtoken";
+
 
 export interface IUser extends Document {
-  fullName: string
-  email: string
-  username: string
-  password: string
-}
+  email: string;
+    mobile: string;
+    password: string;
+    resetToken: string;
+    tokens: string;
+    isVerified: number;
+    isActive: string;
+    userRole: string;
+    otpHash: string;
+    orders: [{
+      orderId: string;
+      orderName: string;
+      orderStatus: number;
+    }];
+    profile: {
+      name: string;
+      gender: string;
+      location: string;
+      website: string;
+      picture: string;
+    };
+    generateJWT: generateJWTFunction;
 
-export default mongoose.model<IUser>('User', user)
+}
+type generateJWTFunction = () => string;
+userSchema.pre("save", function save(next) {
+  const user = this as IUser;
+  if (!user.isModified("password")) {
+      return next();
+  }
+  bcrypt.genSalt(10, (err, salt) => {
+      if (err) {
+          return next(err);
+      }
+      bcrypt.hash(
+          user.password,
+          salt,
+          (err: mongoose.Error, hash) => {
+              if (err) {
+                  return next(err);
+              }
+              user.password = hash;
+              next();
+          }
+      );
+  });
+});
+
+userSchema.methods.comparePassword = function (
+candidatePassword: string,
+cb: (err: any, isMatch: any) => void
+) {
+bcrypt.compare(
+    candidatePassword,
+    this.password,
+    (err: mongoose.Error, isMatch: boolean) => {
+        cb(err, isMatch);
+    }
+);
+};
+const JWT_SECRET='ersashdfjhasdlkjfhalksdjh234fgfdlak'
+userSchema.methods.generateJWTFunction = function() {
+    const body = { _id: this._id, email: this.email };
+    const token = sign({ user: body }, JWT_SECRET);
+    return token;
+}
+export default mongoose.model<IUser>('User', userSchema)

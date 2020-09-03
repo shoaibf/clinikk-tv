@@ -15,6 +15,7 @@ A table to store all user credentials, tokens, profile info and orders placed by
       isVerified: integer,
       isActive: integer,
       user_role: string,
+      preference: string,
       orders: Object
         {
             orderId: string,
@@ -24,8 +25,7 @@ A table to store all user credentials, tokens, profile info and orders placed by
       profile: Object
         {
             name: string,
-            gravator: string,
-            preference: string
+            gravator: string            
         },
       createdAt: Timestamp,
       updatedAt: Timestamp

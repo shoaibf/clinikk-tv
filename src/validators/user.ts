@@ -1,10 +1,14 @@
 import * as Joi from '@hapi/joi'
 
 export default {
-  create: Joi.object().keys({
-    fullName: Joi.string().required(),
+  register: Joi.object().keys({
     email: Joi.string().required(),
-    username: Joi.string().required(),
-    password: Joi.string().required()
+    mobile: Joi.string().length(10).required(),
+    password: Joi.string().min(3).required(),
+    otp: Joi.string().required()
+  }),
+  create: Joi.object().keys({
+    email: Joi.string(),
+    mobile: Joi.string().length(10)
   })
 }

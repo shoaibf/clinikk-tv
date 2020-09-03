@@ -1,13 +1,30 @@
-import { Schema } from 'mongoose'
-import { mongoosePagination } from 'ts-mongoose-pagination'
+import mongoose, { Document, Schema } from 'mongoose'
 
-const user: Schema = new Schema({
-  fullName: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
-  username: { type: String, required: true },
-  password: { type: String, required: true },
-}, { collection: 'user', timestamps: true })
 
-user.plugin(mongoosePagination)
+const userSchema: Schema = new Schema({
+  email: { type: String, unique: true },
+  mobile: { type: String, unique: true },
+  password: String,
+  resetToken: String,
+  tokens: Array,
+  isVerified: { type: Number, default: 0 },
+  isActive: { type: Number, default: 1 },
+  userRole: { type: String, default: "Customer" },
+  otpHash: String,
+  orders: [{
+    orderId: { type: String, unique: true },
+    orderName: String,
+    orderStatus: Number
+  }],
+  profile: {
+    name: String,
+    gender: String,
+    location: String,
+    website: String,
+    picture: String,
+  }
+},
+  { timestamps: true });
 
-export default user
+  
+export default userSchema
