@@ -23,13 +23,13 @@ passport.deserializeUser((id, done) => {
 
 passport.use(
     new LocalStrategy({ usernameField: "email" }, (email, password, done) => {
-        User.findOne({ email: email.toLowerCase() }, (err, user: any) => {
+        User.findOne({ $or: [{ email: email }, { mobile: email }] }, (err, user: any) => {
             if (err) {
                 return done(err);
             }
             if (!user) {
                 return done(undefined, false, {
-                    message: `Email ${email} not found.`,
+                    message: `User with ${email} not found.`,
                 });
             }
             user.comparePassword(password, (err: Error, isMatch: boolean) => {

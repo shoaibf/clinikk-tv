@@ -97,6 +97,29 @@ Sample Response:
 }
     
 ```
+#### CREATE service
+Endpoint: POST api/services/
+Sample Request:
+```
+{
+    "serviceName": "logoRegistration",
+    "serviceDisplayName": "Logo Registration",
+    "category": "Taxation",
+    "serviceType": "CA",
+    "description": "Our Service offers GST Registration in India.
+                  Quickly and Efficiently at Affordable Rate.
+                  We give 100% online service.",
+    "contentLink": "https://docs.google.com/spreadsheets/d/JYasdasdasda/",
+    "icon": "www.lawtorney/services/gst_reg2.jpeg"
+}
+```
+Sample Response:
+```
+{
+    "message": "Service successfully Created"
+}
+    
+```
 #### UPDATE service
 Endpoint: PUT api/services/:serviceId
 Sample Request:

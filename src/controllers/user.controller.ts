@@ -6,6 +6,7 @@ import passport from "passport";
 import { IVerifyOptions } from "passport-local";
 import { SALT_ROUNDS } from "../config/globals";
 import User, { IUser } from "./../database/models/user";
+import "../config/passport";
 
 export const sendOtpEmail = (user: IUser, OTP: String): Promise<boolean> => {
     const transporter = nodemailer.createTransport({
@@ -153,10 +154,9 @@ export const verifySignup = async (
     res: Response,
     next: NextFunction
 ) => {
-    const user = req.user as IUser;
     User.findOne(
         { $or: [{ email: req.body.email }, { mobile: req.body.mobile }] },
-        (err, existingEmail) => {
+        (err, user: any) => {
             if (err) {
                 return next(err);
             }
@@ -167,20 +167,19 @@ export const verifySignup = async (
                 bcrypt.compareSync(inputOtp, hashOtp[0]) &&
                 new Date(parseInt(expires)) > new Date()
             ) {
-                const hashPassword = bcrypt.hashSync(req.body.password, 10);
-                user.password = hashPassword;
+              
+                user.password = req.body.password;
                 user.mobile = req.body.mobile;
+                user.isVerified = 1;
                 user.save((err: WriteError) => {
                     if (err) {
                         return next(err);
                     }
-                    req.logIn(user, (err) => {
-                        if (err) {
-                            return next(err);
-                        }
-                        res.json({ msg: "success!" });
-                    });
+                    return res.json({ msg: "success!" });
                 });
+            }
+            else {
+              return res.json({ msg: "Invalid OTP or expired!" });
             }
         }
     );
@@ -251,4 +250,11 @@ export const getAccount = (req: Request, res: Response, next: NextFunction) => {
 export const logout = (req: Request, res: Response) => {
     req.logout();
     res.redirect("/");
+};
+/**
+ * GET /test
+ * Test route
+ */
+export const testRoute = (req: Request, res: Response, next: NextFunction) => {
+  res.json(req.user);
 };

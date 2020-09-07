@@ -5,8 +5,9 @@ import database from "./database/connect";
 import routes from "./routes";
 import errorHandler from "./utilities/errors/handler";
 import middleware from "./utilities/middleware/interceptor";
+import passport from "passport";
 
-dotEnv.config();
+
 const app = express();
 const databaseuri =
     "mongodb://admin:admin%40123@ds147225.mlab.com:47225/lawtorney-beta-dev";
@@ -14,6 +15,7 @@ const port = 3000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+app.use(passport.initialize());
 
 database(databaseuri);
 middleware(app);
