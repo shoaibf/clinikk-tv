@@ -1,6 +1,7 @@
 import { Application, NextFunction, Request, Response } from "express";
 import Auth from "./auth";
 import User from "./user";
+import Service from "./service" 
 
 export default (app: Application) => {
     app.get("/", (req: Request, res: Response, next: NextFunction) => {
@@ -11,5 +12,6 @@ export default (app: Application) => {
     });
 
     app.use("/user", User);
+    app.use("/service", Service);
     app.use("/auth", Auth);
 };

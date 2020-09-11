@@ -11,7 +11,7 @@ export interface IUser extends Document {
     tokens: string;
     isVerified: number;
     isActive: string;
-    userRole: string;
+    role: string;
     otpHash: string;
     orders: [{
       orderId: string;

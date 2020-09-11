@@ -9,7 +9,7 @@ const userSchema: Schema = new Schema(
         tokens: Array,
         isVerified: { type: Number, default: 0 },
         isActive: { type: Number, default: 1 },
-        userRole: { type: String, default: "Customer" },
+        role: { type: String, default: "Customer" },
         otpHash: String,
         orders: [
             {
