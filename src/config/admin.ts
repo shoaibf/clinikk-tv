@@ -4,10 +4,16 @@ import User, { IUser } from "./../database/models/user";
 
 export const isAdmin = (req: Request, res: Response, next: NextFunction) =>{
     const user = req.user as IUser;
-
-        if(user.role == 'Admin'){
+    User.findById(user._id, (err, user: IUser) => {
+        if (err) {
+            return next(err);
+        }
+    console.log(user.role)
+        if(user.role === 'Admin'){
             next();
         }else{
-            res.status(403).send('Unauthorized');
+          return  res.status(403).send('Unauthorized');
         }
-    }
+});
+}
+    

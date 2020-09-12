@@ -7,8 +7,8 @@ import * as role from "../config/admin"
 
 
 const router: Router = Router()
-router.get("/list", validate(validators.service.create),controller.service.listServices);
-router.post("/create", passportConfig.isAuthenticated, role.isAdmin, controller.service.createService);
+router.get("/list", controller.service.listServices);
+router.post("/create", validate(validators.service.create),passportConfig.isAuthenticated, role.isAdmin, controller.service.createService);
 
 const Service: Router = router
 

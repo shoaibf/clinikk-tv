@@ -1,12 +1,17 @@
 import { NextFunction, Request, Response } from "express";
 import Service, { IService } from "./../database/models/service";
+const ObjectId = require('mongodb').ObjectID;
 
 /* POST service/api/create
  * Create/Update Service Page.
  */
 export const createService = async (req: Request, res: Response, next: NextFunction) => 
 {
-    Service.findOneAndUpdate({ _id: req.params.id }, req.body, { upsert: true }, (err, service) => {
+    var query = {_id: req.params.id};
+if (!query._id) {
+    query._id = new ObjectId();
+}
+    Service.findOneAndUpdate(query, req.body, { upsert: true, new: true }, (err, service) => {
         if(err){
             return res.status(500).send({
                 msg: "Error! Create Service failed"
