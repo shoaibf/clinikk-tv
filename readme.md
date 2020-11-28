@@ -1,5 +1,5 @@
-## boilerplate-typescript-node-express
-simple boilerplate - a small ExpressJS app using Typescript.
+## Clinikk Video Streaming App
+Clinikk-tv A Simple ExpressJS app using Typescript.
 
 ----------
 
@@ -19,7 +19,11 @@ To get the Node server running locally:
 ### Folders
 
 - `src/controllers` - Contains all the application controller
-- `src/routes` - Contains all the the route definitions for our API
+- `src/routes` - Contains all the route definitions for our API
+- `src/database` - Contains all the models and schema for our API
+- `src/validators` - Contains all the validations for Post APIs
+
+- `documentation` - Contains the system design, schema implemented for the Project
 
 Run the project in development mode
 
@@ -29,15 +33,16 @@ The api can now be accessed at
 
     http://localhost:3000
 
-To check the list of available api and can be accessed at
-
-    http://localhost:3000/endpoints
-
 To compile all `src/app.ts` files to `dist/app.js`
 
     npm run build
 
+POCs which are yet to be added -
 
+- File Upload to S3 and transcoding the media for optimized video streaming
+- Watch history of the user
+- Admin Management and Video Management System
+- Like, dislike for videos,comments
 ### License ###
 
 This example codebases is open-sourced software licensed under the MIT license
