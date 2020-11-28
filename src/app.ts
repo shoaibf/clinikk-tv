@@ -10,11 +10,11 @@ import passport from "passport";
 
 const app = express();
 const databaseuri =
-    "mongodb://admin:admin%40123@ds147225.mlab.com:47225/lawtorney-beta-dev";
+    "mongodb://clinikk:clinikk123@ds141108.mlab.com:41108/clinikk-tv";
 const port = 3000;
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false })); // for parsing application/x-www-form-urlencoded
 app.use(passport.initialize());
 
 database(databaseuri);

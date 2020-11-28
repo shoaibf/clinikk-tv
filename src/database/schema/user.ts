@@ -3,28 +3,22 @@ import { Schema } from "mongoose";
 const userSchema: Schema = new Schema(
     {
         email: { type: String, unique: true },
-        mobile: { type: String, default: null },
         password: String,
+        fullname: String,
         resetToken: String,
-        tokens: Array,
-        isVerified: { type: Number, default: 0 },
-        isActive: { type: Number, default: 1 },
-        role: { type: String, default: "Customer" },
-        otpHash: String,
-        orders: [
-            {
-                orderId: { type: String, unique: true },
-                orderName: String,
-                orderStatus: Number,
-            },
-        ],
+        isVerified: { type: Boolean, default: false },
+        role: { type: String, default: "Subscriber" },
         profile: {
-            name: String,
             gender: String,
-            location: String,
-            website: String,
-            picture: String,
+            gravator: String
         },
+        watchHistory: [
+            {
+                videoId: String,
+                title: String,
+                watchTime: Date
+            }
+        ]
     },
     { timestamps: true }
 );

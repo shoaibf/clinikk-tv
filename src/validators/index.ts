@@ -1,6 +1,6 @@
 import user from './user'
-import service from './service'
+import videos from './videos'
 
 export default {
-  user,service
+  user, videos
 }

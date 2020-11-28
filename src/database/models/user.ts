@@ -4,27 +4,20 @@ import * as bcrypt from 'bcrypt'
 import { sign } from "jsonwebtoken";
 
 export interface IUser extends Document {
-  email: string;
-    mobile: string;
-    password: string;
-    resetToken: string;
-    tokens: string;
-    isVerified: number;
-    isActive: string;
-    role: string;
-    otpHash: string;
-    orders: [{
-      orderId: string;
-      orderName: string;
-      orderStatus: number;
-    }];
-    profile: {
-      name: string;
-      gender: string;
-      location: string;
-      website: string;
-      picture: string;
-    };
+      email: string,
+      fullname: string,
+      password: string,
+      resetToken: string,
+      isVerified: boolean,
+      role: string,
+      profile:
+        {
+            gender: string,
+            gravator: string            
+        },
+     watchHistory: Object      
+
+  
     generateJWT: generateJWTFunction;
 
 }

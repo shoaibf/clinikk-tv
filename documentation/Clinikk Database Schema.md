@@ -8,13 +8,14 @@ A table to store all user credentials, tokens, profile info .
   {
       userId: string,
       email: string,
+      fullname: string,
       password: string,
       resetToken: string,
-      isVerified: integer,
+      isVerified: boolean,
       user_role: string,
       profile:
         {
-            name: string,
+            gender: string,
             gravator: string            
         },
      watchHistory: Object
@@ -35,14 +36,12 @@ To store of all uploaded videos.
   {
     videoId: string
     user: {
-        id: user.userId,
-        name: user.profile.name
+        id: user.userId
     },
     status: integer,
     title: string,
     category: string,
     description: string,
-    thumbnail: string,
     tags : Array,
     hours: integer,
     minutes: integer,
@@ -64,6 +63,7 @@ To store comments, replies for each video
   {
       commentId: string,
       videoId: string,
+      name: string,
       text: string,
       commentLikes: integer,
       commentDislikes:integer

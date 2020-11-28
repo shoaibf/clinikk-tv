@@ -23,7 +23,7 @@ passport.deserializeUser((id, done) => {
 
 passport.use(
     new LocalStrategy({ usernameField: "email" }, (email, password, done) => {
-        User.findOne({ $or: [{ email: email }, { mobile: email }] }, (err, user: any) => {
+        User.findOne({ email: email }, (err, user: any) => {
             if (err) {
                 return done(err);
             }
